@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车</title>
+    <link rel="stylesheet" href="css/car.css">
+</head>
+<body>
+        <header>
+                <div class="center">
+                    <div class="header-logo fl"><a href="#"></a></div>
+                    <div class="header-right fr">
+                        <div class="header-right">
+                            <ul>
+                                <li>你好,</li>
+                                <li><a href="#">188*****8</a></li>
+                                <li><a href="#"></a></li>
+                                <li><a href="#">[退出]</a></li>
+                                <li><a href="#">订单管理 <span>|</span></a></li>
+                                <li><i class="header-phone"></i>400-6789-888 <span>|</span></li>
+                                <li><a href="#"><i class="header-people"></i>在线客服 <span>|</span></a></li>
+                                <li class="clearfix">
+                                    <a href="#"><i class="header-fuwu"></i>会员服务</a>
+                                    <dl>
+                                        <dt><a href="#">帮助中心</a></dt>
+                                        <dd><a href="#">会员反馈</a></dd>
+                                        <dd><a href="#">会员俱乐部</a></dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="header-right-down fr">
+                            <img src="images/car-header-right-down.jpg">
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main>
+                    <div class="center" id="app">
+                        <div class="main-title">
+                            <span><a href="#">特卖商品</a></span><i></i>
+                            <span><a href="#">唯品医药</a></span>
+                        </div>
+                        <div class="main-ps">
+                            <span>配送至 </span>
+                            <span>上海市</span>
+                            <span></span>
+                            <span>请在倒计时结束前提交订单，下单后你另有 30 分钟的支付时间。</span>
+                        </div>
+                        <div class="main-jx">
+                            <div class="main-jx-title">
+                                <dl>
+                                    <dt>精选特卖</dt>
+                                    <dd>单价</dd>
+                                    <dd>数量</dd>
+                                    <dd>小计</dd>
+                                    <dd>操作</dd>
+                                </dl>
+                            </div>
+                            <ul class="main-jx-sp" v-for="(product, index) in productList" :key="index">
+                                <li class="main-sp clearfix">
+                                    <div class="img"><a href="#"><img :src="product.pic"></a></div>
+                                    <div class="main-sp-infor"><!-- 商品 -->
+                                        <span>{{product.shop}}</span><i></i>
+                                        <span><a href="#">{{product.res}}</a></span>
+                                        <p>尺码:{{product.size}}</p>
+                                    </div>
+                                    <div class="main-sp-price">
+                                        <p>¥{{product.dPrice}}</p>
+                                        <p>¥{{product.dePrice}}</p><!-- 价格 -->
+                                    </div>
+                                    <div class="main-sp-sl">
+                                        <div class="main-sp-num">
+                                            <span class="main-sp-minus" id="minus" @click.stop="minus(index)">-</span>
+                                            <input type="text" :value="product.num" id="input"/>
+                                            <span class="main-sp-plus" id="plus" @click.stop="add(index)">+</span>
+                                        </div><!-- 数量 -->
+                                    </div>
+                                    <div class="main-sp-yh"><!-- 小计 -->
+                                        <p>¥ {{product.rPrice}}</p>
+                                        <p>已优惠 ¥{{product.sPrice}}</p>
+                                    </div>
+                                    <div class="main-sp-cz" @click.stop="del(index)">删除</div>
+                                </li>
+                            </ul>
+                            <div class="main-sp-yf">
+                                <span>运费</span>
+                                <span>唯品自营: 自营商品已免运费</span>
+                            </div>
+                        </div>
+                        <div class="main-js"><!-- 结算 -->
+                            <div class="main-js-up clearfix">
+                                <div class="main-js-left fl">
+                                    <div class="main-js-yh">
+                                        <span>已成功使用<i class="pink">1</i>张优惠券</span>
+                                        <span>-<i class="pink">¥30</i></span>
+                                        <span><a href="#">取消使用</a></span>
+                                    </div>
+                                    <div class="main-js-kl pink">使用优惠口令</div>
+                                </div>
+                                <div class="main-js-right fr">
+                                    <div class="main-right-r fr">
+                                        <p>¥{{sum()}}</p>
+                                        <p>-¥30</p>
+                                        <p id="sumSale">-¥{{sSum()}}</p>
+                                        <p class="pink">¥{{rSum()}}</p>
+                                    </div>
+                                    <div class="main-right-l fr">
+                                        <span>共<i class="pink" id="sumNum">{{sNum()}}</i>件商品 商品金额</span>
+                                        <span>优惠券优惠</span>
+                                        <span>活动优惠</span>
+                                        <span>总金额（未含运费）</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main-js-down">
+                                <p><a href="#">立即结算</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            
+            
+            
+            
+                <div class="banner">
+                    <div class="center">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            
+            
+                <footer>
+                    <div class="center">
+                         <div>
+                            <span><a href="#">关于我们 |</a></span>
+                            <span><a href="#">About us |</a></span>
+                            <span><a href="#">Investor Relations |</a></span>
+                            <span><a href="#">媒体报道 |</a></span>
+                            <span><a href="#">品牌招商 |</a></span>
+                            <span><a href="#">隐私条款 |</a></span>
+                            <span><a href="#">唯品诚聘 |</a></span>
+                            <span><a href="#">365爱心基金 |</a></span>
+                            <span><a href="#">唯品卡 |</a></span>
+                            <span><a href="#">联系我们</a></span>
+                        </div>
+                        <p>Copyright © 2008-2018 vip.com，All Rights Reserved  使用本网站即表示接受
+                            <a href="#">唯品会用户协议</a>
+                            。版权所有 
+                            <a href="#">广州唯品会电子商务有限公司</a></p>
+                        <p><a href="#"><img src="images/police_icon.png">粤公网安备 44010302111111号</a>
+                            <a href="#">粤ICP备08114786号</a>
+                            <a href="#">增值业务经营许可证:粤B2-20170777</a>
+                            <a href="#">网络文化经营许可证:粤网文[2015]1528-299</a></p>
+                        <p>
+                            <a href="#">自营主体经营证照 </a>
+                            <a href="#">风险监测信息 </a>
+                            <a href="#">互联网药品交易服务资格证 (粤C20140002)</a>
+                        </p>
+                        <p>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                            <a href="#"></a>
+                        </p>
+                    </div>
+                </footer>
+            <script src="js/vue.js"></script>
+            <script src="js/car.js"></script>
+</body>
+</html>
